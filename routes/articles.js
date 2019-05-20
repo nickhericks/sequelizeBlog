@@ -5,7 +5,7 @@ var Article = require('../models').Article;
 
 /* GET articles listing. */
 router.get('/', function(req, res, next) {
-	Article.findAll().then(function(articles){
+	Article.findAll({order: [["createdAt", "DESC"]]}).then(function(articles){
 		res.render('articles/index', {articles: articles, title: 'My Awesome Blog' });
 	});
 });
