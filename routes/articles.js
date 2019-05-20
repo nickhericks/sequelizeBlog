@@ -24,9 +24,9 @@ router.get('/new', function(req, res, next) {
 
 /* Edit article form. */
 router.get('/:id/edit', function(req, res, next){
-	var article = find(req.params.id);  
-
-	res.render('articles/edit', {article: article, title: 'Edit Article'});
+	Article.findByPk(req.params.id).then(function(article) {
+		res.render('articles/edit', {article: article, title: 'Edit Article'});
+	});
 });
 
 
