@@ -25,7 +25,7 @@ router.post('/', function(req, res, next) {
 					res.render("articles/new", {
             article: Article.build(req.body),
 						title: "New Article",
-						error: err.errors
+						errors: err.errors
           });
 			} else {
 				throw err;
@@ -112,11 +112,11 @@ router.put('/:id', function(req, res, next){
 			if (err.name === 'SequelizeValidationError') {
 				var article = Article.build(req.body);
 				article.id = req.params.id;
-				
+
 				res.render("articles/edit", {
 					article: article,
 					title: "Edit Article",
-					error: err.errors
+					errors: err.errors
 				});
 			} else {
 				throw err;

@@ -7,7 +7,7 @@ module.exports = function(sequelize, DataTypes) {
 			type: DataTypes.STRING,
 			validate: {
 				notEmpty: {
-					msg: "Title is required"
+					msg: "Title is required";
 				}
 			}
 		},
