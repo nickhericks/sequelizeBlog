@@ -47,12 +47,11 @@ router.get('/:id', function(req, res, next) {
 
 /* PUT update article. */
 router.put('/:id', function(req, res, next){
-	var article = find(req.params.id);
-	article.title = req.body.title;
-	article.body = req.body.body;
-	article.author = req.body.author;
-  
-	res.redirect('/articles/' + article.id);    
+	Article.findByPk(req.params.id).then(function(article) {
+		return article.update(req.body);
+	}).then(function(article){
+		res.redirect("/articles/" + article.id);    
+	});
 });
 
 /* DELETE individual article. */
