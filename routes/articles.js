@@ -20,13 +20,13 @@ router.post('/', function(req, res, next) {
 		.then(function(article) {
 			res.redirect('/articles/' + article.id);
 		})
-		.catch(function(){
+		.catch(function(err){
 			if(err.name === 'SequelizeValidationError'){
-					res.render("articles/new", {
-            article: Article.build(req.body),
-						title: "New Article",
-						errors: err.errors
-          });
+				res.render('articles/new', {
+					article: Article.build(req.body),
+					title: 'New Article',
+					errors: err.errors
+				});
 			} else {
 				throw err;
 			}
@@ -108,14 +108,14 @@ router.put('/:id', function(req, res, next){
 		.then(function(article) {
 			res.redirect('/articles/' + article.id);
 		})
-		.catch(function() {
+		.catch(function(err) {
 			if (err.name === 'SequelizeValidationError') {
 				var article = Article.build(req.body);
 				article.id = req.params.id;
 
-				res.render("articles/edit", {
+				res.render('articles/edit', {
 					article: article,
-					title: "Edit Article",
+					title: 'Edit Article',
 					errors: err.errors
 				});
 			} else {
