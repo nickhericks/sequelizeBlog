@@ -32,9 +32,9 @@ router.get('/:id/edit', function(req, res, next){
 
 /* Delete article form. */
 router.get('/:id/delete', function(req, res, next){
-	var article = find(req.params.id);  
-  
-	res.render('articles/delete', {article: article, title: 'Delete Article'});
+	Article.findByPk(req.params.id).then(function(article) {
+		res.render('articles/delete', {article: article, title: 'Delete Article'});
+	});
 });
 
 
