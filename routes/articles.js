@@ -34,10 +34,15 @@ router.get('/new', function(req, res, next) {
 router.get('/:id/edit', function(req, res, next){
 	Article.findByPk(req.params.id)
 		.then(function(article) {
-			res.render('articles/edit', {
-				article: article,
-				title: 'Edit Article'
-			});
+			if(article) {
+				res.render('articles/edit', {
+					article: article,
+					title: 'Edit Article'
+				});
+			} else {
+				// If article with a matching id does not exist, display 404
+				res.send(404);
+			}
 		})
 		.catch(function(err) {
 			res.send(500);
@@ -49,10 +54,14 @@ router.get('/:id/edit', function(req, res, next){
 router.get('/:id/delete', function(req, res, next){
 	Article.findByPk(req.params.id)
 		.then(function(article) {
-			res.render('articles/delete', {
-				article: article,
-				title: 'Delete Article'
-			});
+			if(article) {
+				res.render('articles/delete', {
+					article: article,
+					title: 'Delete Article'
+				});
+			} else {
+				res.send(404);
+			}
 		})
 		.catch(function(err) {
 			res.send(500);
@@ -64,7 +73,11 @@ router.get('/:id/delete', function(req, res, next){
 router.get('/:id', function(req, res, next) {
 	Article.findByPk(req.params.id)
 		.then(function(article) {
-			res.render('articles/show', { article: article, title: article.title });
+			if(article) {
+				res.render('articles/show', { article: article, title: article.title });
+			} else {
+				res.send(404);
+			}
 		})
 		.catch(function(err) {
 			res.send(500);
@@ -75,7 +88,11 @@ router.get('/:id', function(req, res, next) {
 router.put('/:id', function(req, res, next){
 	Article.findByPk(req.params.id)
 		.then(function(article) {
-			return article.update(req.body);
+			if(article) {
+				return article.update(req.body);
+			} else{
+				res.send(404);
+			}
 		})
 		.then(function(article) {
 			res.redirect('/articles/' + article.id);
@@ -89,7 +106,11 @@ router.put('/:id', function(req, res, next){
 router.delete('/:id', function(req, res, next){
 	Article.findByPk(req.params.id)
 		.then(function(article) {
-			return article.destroy();
+			if(article) {
+				return article.destroy();
+			} else {
+				res.send(404);
+			}
 		})
 		.then(function() {
 			res.redirect('/articles');
