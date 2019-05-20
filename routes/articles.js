@@ -20,6 +20,17 @@ router.post('/', function(req, res, next) {
 		.then(function(article) {
 			res.redirect('/articles/' + article.id);
 		})
+		.catch(function(){
+			if(err.name === 'SequelizeValidationError'){
+					res.render("articles/new", {
+            article: Article.build(req.body),
+						title: "New Article",
+						error: err.errors
+          });
+			} else {
+				throw err;
+			}
+		})
 		.catch(function(err) {
 			res.send(500);
 		});
@@ -88,14 +99,28 @@ router.get('/:id', function(req, res, next) {
 router.put('/:id', function(req, res, next){
 	Article.findByPk(req.params.id)
 		.then(function(article) {
-			if(article) {
+			if (article) {
 				return article.update(req.body);
-			} else{
+			} else {
 				res.send(404);
 			}
 		})
 		.then(function(article) {
 			res.redirect('/articles/' + article.id);
+		})
+		.catch(function() {
+			if (err.name === 'SequelizeValidationError') {
+				var article = Article.build(req.body);
+				article.id = req.params.id;
+				
+				res.render("articles/edit", {
+					article: article,
+					title: "Edit Article",
+					error: err.errors
+				});
+			} else {
+				throw err;
+			}
 		})
 		.catch(function(err) {
 			res.send(500);
