@@ -3,43 +3,38 @@
 ### Sequelize Blog application
 A simple blog application built using the Sequelize ORM, which allows us to talk to a SQL database (SQLite in this case) using Node.js
 
+## To view project
+1. Download project.
+2. Run 'npm install' in the command line.
+3. Run 'npm start' in the command line.
+4. Go to 'localhost:3000' in your browser.
+
 ***
 <!-- <img src="https://res.cloudinary.com/dtqevfsxh/image/upload/v1554483544/portfolio/expressFlashcards.png" width="500px"> -->
 
 <!-- ## View project
 :mag: Live version available at [nickhericks.github.io/reactScoreboardPremium/](https://nickhericks.github.io/reactScoreboardPremium/) -->
 
-<!-- ## Project objective
-This project was built as I was learning about the Express web framework and the Pug templating engine. Through this project I learned about the request and response objects, body-parser, routes, templates, middleware, cookies (cookie-parser) redirects, error handling, modularizing routes, route parameters and query strings, serving static assets with a static server, and much more. :) -->
+## Tools used
+- Sequelize ORM
 
-<!-- ## Techniques and concepts
-- Express web framework
-- Pug templating engine -->
-
-<!-- ## Code example
+## Code example
 ```javascript
-// Begin interval for tick()
-  componentDidMount() {
-    console.log('stopwatch mounted')
-    this.intervalID = setInterval(() => this.tick(), 100)
-  }
-
-  // Do not leak memory if stopwatch is removed from page
-  componentWillUnmount() {
-    clearInterval(this.intervalID);
-  }
-
-  tick = () => {
-    console.log('ticking...')
-    if (this.state.isRunning) {
-      const now = Date.now();
-      this.setState( prevState => ({
-        previousTime: now,
-        elapsedTime: prevState.elapsedTime + (now - this.state.previousTime)
-      }));
-    }
-  }
-``` -->
+/* GET individual article route */
+router.get('/:id', function(req, res, next) {
+	Article.findByPk(req.params.id)
+		.then(function(article) {
+			if(article) {
+				res.render('articles/show', { article: article, title: article.title });
+			} else {
+				res.send(404);
+			}
+		})
+		.catch(function(err) {
+			res.send(500);
+		});
+});
+```
 
 ## Acknowledgements
 This project was built as part of the [Full Stack JavaScript Techdegree](https://join.teamtreehouse.com/techdegree/) offered by [Treehouse](https://teamtreehouse.com) :raised_hands:
