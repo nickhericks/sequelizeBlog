@@ -1,15 +1,7 @@
 var express = require('express');
 var router = express.Router();
-var dateFormat = require('dateformat');
 var Article = require('../models').Article;
 
-function publishedAt() {
-	return dateFormat(this.createdAt, 'dddd, mmmm dS, yyyy, h:MM TT');
-}
-
-function shortDescription(){ 
-	return this.body.length > 30 ? this.body.substr(0, 30) + '...' : this.body;
-}
 
 var articles = [
 	{
