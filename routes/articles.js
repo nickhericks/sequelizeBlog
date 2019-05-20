@@ -56,11 +56,11 @@ router.put('/:id', function(req, res, next){
 
 /* DELETE individual article. */
 router.delete('/:id', function(req, res, next){
-	var article = find(req.params.id);  
-	var index = articles.indexOf(article);
-	articles.splice(index, 1);
-
-	res.redirect('/articles');
+	Article.findByPk(req.params.id).then(function(article) {
+		return article.destroy();
+	}).then(function(){
+		res.redirect("/articles");
+	});
 });
 
 
