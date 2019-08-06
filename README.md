@@ -3,6 +3,8 @@
 ### Sequelize Blog application
 A simple blog application built using the Sequelize ORM, which allows us to talk to a SQL database (SQLite in this case) using Node.js
 
+<img src="https://res.cloudinary.com/dtqevfsxh/image/upload/v1565077742/portfolio/sequelizeblog.png" width="500px">
+
 ## To view project
 1. Download project.
 2. Run 'npm install' in the command line.
@@ -10,7 +12,6 @@ A simple blog application built using the Sequelize ORM, which allows us to talk
 4. Go to 'localhost:3000' in your browser.
 
 ***
-<!-- <img src="https://res.cloudinary.com/dtqevfsxh/image/upload/v1554483544/portfolio/expressFlashcards.png" width="500px"> -->
 
 <!-- ## View project
 :mag: Live version available at [nickhericks.github.io/reactScoreboardPremium/](https://nickhericks.github.io/reactScoreboardPremium/) -->
